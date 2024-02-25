@@ -231,7 +231,7 @@ if( x1 === undefined || x1 === null || x1===NaN){
 }
 
 let b = NaN || 'default';
-console.log(b)
+console.log(b);
 // TASK4
 /* - з файлу arrays.js (лежить в папці 2023 plan ) взяти масив coursesAndDurationArray. За допомоги іф перевірити кожен його елемент на тривалість навчання. У випадку якщо тривалість довша за 5 місяців вивести в консоль "Супер".*/
 
