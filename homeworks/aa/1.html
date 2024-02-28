@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+let userAA = [
+  {name: 'a', page: 100},
+  {name: 'v', page: 140},
+  {name: 'c', page: 400},
+  {name: 'd', page: 30},
+  {name: 'e', page: 20},
+]
+maxPage = 0
+let bookName= ''
+for (let i = 0; i < userAA.length; i++) {
+  const userAAElement = userAA[i];
+    if(userAAElement.page > maxPage){
+        maxPage = userAAElement.page;
+        bookName = userAAElement.name;
+    }
+}
+console.log(maxPage)
+console.log(bookName)
+</script>
+</body>
+</html>
