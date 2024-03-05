@@ -166,21 +166,146 @@ console.log(cards)
 
 
 console.log("TASK 3.1 - знайти піковий туз")
-
-console.log(cards.filter(a => ((a.cardSuit === 'spade' ) && (a.value === 'ace'))))
+let task31 = cards.filter(a => ((a.cardSuit === 'spade' ) && (a.value === 'ace')))
+console.log(task31)
 
 console.log("TASK 3.2 всі шістки")
 
-console.log(cards.filter(six => (six.value === '6')))
+let task32 = cards.filter(six => (six.value === '6'))
+console.log(task32)
 
 console.log("TASK 3.3 - всі червоні карти")
 
-console.log(cards.filter(reds => (reds.color ==='red')))
+let task33 = cards.filter(reds => (reds.color ==='red'))
+console.log(task33)
 
 console.log("TASK 3.4 всі буби")
 
-console.log(cards.filter(mast => (mast.cardSuit ==='diamond')))
+let task34 = cards.filter(mast => (mast.cardSuit ==='diamond'))
+console.log(task34)
 
-console.log("TASK 3.4 - всі трефи від 9 та більше") // я не знаю що таке трефи), шось гуглив, певно це хреста
+console.log("TASK 3.5 - всі трефи від 9 та більше") // я не знаю що таке трефи), шось гуглив, певно це хреста
 
-console.log(cards.filter(mast => ((mast.cardSuit ==='clubs') && (mast.value !== '6' && mast.value !== '7' && mast.value !== '8' ))))
+let task35 = cards.filter(mast => ((mast.cardSuit ==='clubs') && (mast.value !== '6' && mast.value !== '7' && mast.value !== '8' )))
+
+console.log(task35)
+
+// TASK 4
+// Взяти описану колоду карт, та за допомоги reduce упакувати всі карти по "мастях" в об'єкт
+// {
+//     spades:[],
+//     diamonds:[],
+//     hearts:[],
+//     clubs:[]
+// }
+console.log("TASK 4 Взяти описану колоду карт, та за допомоги reduce упакувати всі карти по мастях в об'єкт")
+let task4 = cards.reduce((previousValue, currentValue) =>{
+    if (currentValue.cardSuit === 'spade'){
+        previousValue.spades.push(currentValue)
+    }
+    else if(currentValue.cardSuit === 'diamond'){
+            previousValue.diamonds.push(currentValue)
+        }
+    else if(currentValue.cardSuit === 'heart'){
+        previousValue.hearts.push(currentValue)
+    }
+    else if(currentValue.cardSuit === 'clubs'){
+        previousValue.clubs.push(currentValue)
+    }
+    return previousValue
+},
+    {
+        spades: [],
+        diamonds: [],
+        hearts: [],
+        clubs:[]}
+)
+
+console.log(task4)
+
+
+// TASK 5
+// взяти з arrays.js (який лежить в папці 2023 plan) масив coursesArray
+// --написати пошук всіх об'єктів, в який в modules є sass
+// --написати пошук всіх об'єктів, в який в modules є docker
+
+let coursesArray = [
+    {
+        title: 'JavaScript Complex',
+        monthDuration: 5,
+        hourDuration: 909,
+        modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'react', 'angular', 'aws', 'docker', 'git', 'node.js']
+    },
+    {
+        title: 'Java Complex',
+        monthDuration: 6,
+        hourDuration: 909,
+        modules: ['html',
+            'css',
+            'js',
+            'mysql',
+            'mongodb',
+            'angular',
+            'aws',
+            'docker',
+            'git',
+            'java core',
+            'java advanced']
+    },
+    {
+        title: 'Python Complex',
+        monthDuration: 6,
+        hourDuration: 909,
+        modules: ['html',
+            'css',
+            'js',
+            'mysql',
+            'mongodb',
+            'angular',
+            'aws',
+            'docker',
+            'python core',
+            'python advanced']
+    },
+    {
+        title: 'QA Complex',
+        monthDuration: 4,
+        hourDuration: 909,
+        modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'git', 'QA/QC']
+    },
+    {
+        title: 'FullStack',
+        monthDuration: 7,
+        hourDuration: 909,
+        modules: ['html',
+            'css',
+            'js',
+            'mysql',
+            'mongodb',
+            'react',
+            'angular',
+            'aws',
+            'docker',
+            'git',
+            'node.js',
+            'python',
+            'java']
+    },
+    {
+        title: 'Frontend',
+        monthDuration: 4,
+        hourDuration: 909,
+        modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'react', 'angular', 'aws', 'docker', 'git', 'sass']
+    }
+];
+
+console.log("TASK5.1 --написати пошук всіх об'єктів, в який в modules є sass")
+
+let task51 = coursesArray.filter(obj => obj.modules.includes('sass'))
+console.log(task51)
+
+console.log("TASK5.1 --написати пошук всіх об'єктів, в який в modules є docker")
+let task52 = coursesArray.filter(obj => obj.modules.includes('docker'))
+console.log(task52)
+
+
