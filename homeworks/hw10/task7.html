@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        form{
+            width: 300px;
+            height: 300px;
+            border: blue 1px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<form id="form">
+    <input type="number" placeholder="countOfRow" name="countOfRow">
+    <input type="number" placeholder="countOfCells" name="countOfCells">
+    <input type="text" placeholder="content" name="content">
+    <button id="button">Готово</button>
+</form>
+
+<script>
+    // TASK 7
+    // // *** Створити 3 інпута та кнопку. Один визначає кількість рядків, другий - кількість ячеєк, третій вмиіст ячеєк.
+    // При натисканні кнопки, вся ця інформація зчитується і формується табличка, з відповідним вмістом.
+    // (Додатковачастина для завдання)
+
+    let form_task7 = document.forms.form
+    form_task7.onsubmit = function (e){
+        e.preventDefault()
+        let countOfRow = parseInt(this.countOfRow.value);
+        let countOfCells = parseInt(this.countOfCells.value);
+        let contentArray = this.content.value.split(',');
+        let contentIndex = 0;
+
+        let table_main = document.createElement('table')
+        document.body.appendChild(table_main)
+        table_main.style.borderCollapse = 'collapse'
+        table_main.style.border = '1px solid black'
+        for (let i = 0; i < countOfRow; i++) {
+            let row = document.createElement('tr');
+            table_main.append(row)
+            for (let j = 0; j < countOfCells; j++) {
+                let cell = document.createElement('td');
+                cell.style.border = '1px solid black'
+                cell.style.padding = '5px'
+                cell.innerText = contentArray[contentIndex];
+                row.appendChild(cell);
+            }
+        }
+
+
+    }
+
+
+
+</script>
+</body>
+</html>

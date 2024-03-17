@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        form{
+            width: 300px;
+            height: 300px;
+            border: blue 1px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .div_task1{
+            width: 100px;
+            height: 50px;
+            background-color: blanchedalmond;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        #div_task2{
+            margin-top: 50px;
+            width: 20px;
+            height: 20px;
+            background-color: azure;
+        }
+        .butt{
+            width: 50px;
+            height: 30px;
+
+        }
+    </style>
+</head>
+<body>
+<form id="form">
+    <input type="text" placeholder="name" name="name">
+    <input type="text" placeholder="surname" name="surname">
+    <input type="number" placeholder="age" name="age">
+    <button id="button">Готово</button>
+</form>
+<div id="div_task1"> </div>
+
+
+
+<div id="div_task2">5</div>
+
+<div>
+    <p id="text">Text</p>
+    <button id="button4">Hide</button>
+</div>
+
+
+<form id="form2">
+    <input type="number" placeholder="age" name="age">
+    <button id="button5">Confirm</button>
+    <p id="text2"></p>
+</form>
+<script src="hw10.js"></script>
+</body>
+</html>
