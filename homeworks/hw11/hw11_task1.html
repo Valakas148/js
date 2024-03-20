@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+<script>
+    // TASK 1
+    // - взяти https://dummyjson.com/docs/carts та вивести інформацію про всі корзини. Відобразити всі поля кожної корзини.
+
+    fetch('https://dummyjson.com/carts')
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            let {carts} = res
+
+            let div = document.createElement('div')
+            document.body.appendChild(div)
+            div.style.display = 'flex'
+            div.style.justifyContent = 'center'
+            div.style.alignItems = 'center'
+            div.style.flexWrap = 'wrap'
+            div.style.height = '250px'
+            div.style.gap = '50px'
+            let productsCounter = 0;
+
+            for (const cart of carts) {
+                for (const product of cart.products) {
+                    if (productsCounter % 4 === 0) {
+                        let row = document.createElement('div');
+                        row.style.display = 'flex';
+                        row.style.gap = '50px';
+                        div.appendChild(row);
+                    }
+
+                    let div_product = document.createElement('div');
+                    let p1 = document.createElement('p');
+                    p1.innerHTML = `ID:${product.id} - ${product.title}`;
+                    let p2 = document.createElement('p');
+                    p2.innerText = `${product.price}$`;
+                    let img = document.createElement('img');
+                    img.src = product.thumbnail;
+                    img.style.width = '200px';
+                    div_product.append(p1, p2, img);
+                    let rows = div.children;
+                    rows[rows.length - 1].appendChild(div_product);
+                    productsCounter++;
+                }
+            }
+        });
+
+
+</script>
+</body>
+</html>

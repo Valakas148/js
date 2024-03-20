@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+    // TASK 2
+    // - взяти https://dummyjson.com/docs/recipes та вивести інформацію про всі рецепти. Інгредієнти повинні бути список під час відображення.
+
+
+    fetch('https://dummyjson.com/recipes')
+        .then(res => res.json())
+        .then(res =>{
+            console.log(res)
+            let {recipes} = res
+
+
+            let div = document.createElement('div')
+            document.body.appendChild(div)
+            for (const recipe of recipes) {
+                let p_name = document.createElement('p')
+                p_name.innerText = `${recipe.name}`
+                let ul = document.createElement('ul')
+                ul.innerText = `Ingredients:`
+                div.append(p_name, ul)
+                for (const ingEl of recipe.ingredients) {
+                    let li = document.createElement('li')
+                    li.innerText = `${ingEl}`
+                    ul.appendChild(li)
+                }
+            }
+
+        });
+</script>
+</body>
+</html>
