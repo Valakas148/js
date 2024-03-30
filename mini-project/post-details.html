@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    const url = new URLSearchParams(window.location.search)
+    const userID = url.get('id')
+    const postID = parseInt(url.get('postId'));
+    fetch(`https://jsonplaceholder.typicode.com/users/${userID}/posts`)
+        .then(res => res.json())
+        .then(Data => {
+            let post = Data.find(obj => obj.id === postID);
+
+            let div = document.createElement('div')
+            div.classList.add('post')
+            div.style.display = 'flex'
+            div.style.justifyContent = 'center'
+            div.style.alignItems = 'center'
+            div.style.flexDirection = 'column'
+            document.body.appendChild(div)
+
+            let p_text = document.createElement('p')
+            p_text.innerText = 'User Post:'
+            p_text.style.textAlign = 'center'
+            let ul = document.createElement('ul')
+            ul.style.border = '1px solid black'
+            ul.style.padding = '20px'
+            ul.style.backgroundColor = '#95F9F2'
+            div.appendChild(ul)
+            ul.appendChild(p_text)
+            let list = ['title', 'body']
+            for (const postEl of list) {
+                let li_user_posts = document.createElement('li')
+                li_user_posts.innerText = `${postEl} - ${post[postEl]}`
+                ul.appendChild(li_user_posts)
+            }
+
+
+            fetch(`https://jsonplaceholder.typicode.com/posts/${postID}/comments`)
+                .then(res => res.json())
+                .then(Data => {
+
+                    let div_comments = document.createElement('div')
+                    div_comments.style.display = 'flex'
+                    div_comments.style.justifyContent = 'center'
+                    div_comments.style.alignItems = 'center'
+                    div_comments.style.flexWrap = 'wrap'
+                    div_comments.style.gap = '10px'
+                    div_comments.style.width = '1300px'
+
+                    document.body.appendChild(div_comments)
+                    for (const datEl of Data) {
+                        let div_com = document.createElement('div')
+                        div_com.style.width = '300px'
+                        div_com.style.height = '300px'
+                        div_com.style.border = '1px solid blue'
+                        div_com.style.padding = '5px'
+                        div_com.style.backgroundColor = '#E0F3AC'
+                        div_comments.appendChild(div_com)
+                        let p_com = document.createElement('p')
+                        p_com.innerText = 'Comment:'
+                        let ul_comments = document.createElement('ul')
+                        div_com.append(p_com, ul_comments)
+                        for (const [com_key, com_val] of  Object.entries(datEl)) {
+
+                            let li_com = document.createElement('li')
+                            li_com.innerText = `${com_key} - ${com_val}`
+                            ul_comments.appendChild(li_com)
+
+                        }
+                    }
+                })
+        })
+</script>
+</body>
+</html>

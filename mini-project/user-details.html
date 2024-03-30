@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .button1{
+            width: 100px;
+            height: 40px;
+            background-color: azure;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    const url = new URLSearchParams(window.location.search)
+    const userID = url.get('id')
+
+    fetch(`https://jsonplaceholder.typicode.com/users/${userID}`)
+        .then(res => res.json())
+        .then(Data => {
+            let div = document.createElement('div')
+            document.body.appendChild(div)
+            div.style.display = 'flex'
+            div.style.justifyContent = 'center'
+            div.style.alignItems = 'center'
+            div.style.flexDirection = 'column'
+
+            let p = document.createElement('p')
+            p.innerText = "User Info"
+
+
+
+
+            let ul = document.createElement('ul')
+            ul.style.border = '2px solid black'
+            ul.style.padding = '20px'
+            ul.style.backgroundColor = '#FFCC66'
+
+            for (const [dataElKey, dataElVal] of Object.entries(Data)) {
+                let li = document.createElement('li')
+                if(typeof dataElVal === 'object'){
+                    let ul_opt = document.createElement('ul')
+                    li.innerText = `${dataElKey}`
+                    li.append(ul_opt)
+                    ul.append(li)
+
+                    for (const [key_opt, val_opt] of Object.entries(dataElVal)) {
+                        let li_opt = document.createElement('li')
+
+                        if(typeof val_opt === 'object'){
+                            let ul_geo = document.createElement('ul')
+                            li_opt.innerText = `${dataElKey}`
+                            li_opt.append(ul_geo)
+                            ul_opt.append(li_opt)
+
+                            for (const [key_geo, val_geo] of Object.entries(val_opt)) {
+                                let li_geo = document.createElement('li')
+                                li_geo.innerText = `${key_geo} - ${val_geo}`
+                                ul_geo.appendChild(li_geo)
+                            }
+                        }
+                        else {
+                            li_opt.innerText = `${key_opt} - ${val_opt}`
+                            ul_opt.appendChild(li_opt)
+                        }
+                    }
+                }
+                else {
+                    li.innerText = `${dataElKey} - ${dataElVal}`
+                    ul.append(li)
+                }
+            }
+
+
+
+            let button = document.createElement('button')
+            div.append(p,ul, button)
+            button.style.width = '90%'
+            button.style.marginBottom = '10px'
+
+            button.classList.add('button1')
+            button.innerText = 'post of current user'
+
+            let div_post_main = document.createElement('div')
+            div_post_main.style.display = 'none'
+            div_post_main.style.justifyContent = 'center'
+            div_post_main.style.alignItems = 'center'
+            document.body.appendChild(div_post_main)
+
+            button.addEventListener('click', function (){
+                if (div_post_main.style.display==='none'){
+                    div_post_main.style.display = 'flex';
+                    button.innerText = `Hide`;
+                } else{
+                    div_post_main.style.display = 'none';
+                    button.innerText = `post of current user`;
+                }
+
+            })
+
+                fetch(`https://jsonplaceholder.typicode.com/users/${userID}/posts`)
+                    .then(res => res.json())
+                    .then(Data => {
+
+                        let div_post = document.createElement('div')
+                        div_post.style.display = 'flex'
+                        div_post.style.justifyContent = 'center'
+                        div_post.style.alignItems = 'center'
+                        div_post.style.flexWrap = 'wrap'
+                        div_post.style.gap = '10px'
+                        div_post.style.width = '1600px'
+                        div_post_main.appendChild(div_post)
+
+                        for (const datEl of Data) {
+                            let div_comment = document.createElement('div')
+                            div_comment.style.width = '300px'
+                            div_comment.style.height = '150px'
+                            div_comment.style.border = '2px solid blue'
+                            div_comment.style.textAlign = 'center'
+                            div_comment.style.backgroundColor = '#A5ECF7'
+
+
+
+
+                            let p_post_small = document.createElement('p')
+                            p_post_small.innerText = `title - ${datEl.title}`
+
+                            let a_post = document.createElement('a')
+                            a_post.href = `post-details.html?id=${userID}&postId=${datEl.id}`
+                            a_post.innerText = 'Post details >'
+                            a_post.style.textDecoration = 'none'
+                            a_post.style.color = '#764309'
+
+                            a_post.onclick = function (){
+                                fetch(`https://jsonplaceholder.typicode.com/users/${userID}/posts`)
+                                    .then(res => res.json())
+                                    .then(Data => {
+                                        window.location.href = `post-details.html?id=${userID}&postId=${datEl.id}`;
+
+                                    })
+                            }
+                            div_comment.append(p_post_small, a_post)
+                            div_post.appendChild(div_comment)
+                        }
+
+
+
+                    })
+        })
+
+
+
+</script>
+</body>
+</html>
